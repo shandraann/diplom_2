@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class Ingredient {
-    public boolean success;
+    private boolean success;
     public List<Data> data;
 
     public boolean isSuccess() {
