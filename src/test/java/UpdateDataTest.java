@@ -21,7 +21,7 @@ public class UpdateDataTest {
 
     @After
     public void delete() {
-        userClient.delete();
+        userClient.delete(token);
     }
 
     @Test

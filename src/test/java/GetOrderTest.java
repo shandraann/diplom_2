@@ -44,7 +44,7 @@ public class GetOrderTest {
 
     @After
     public void delete(){
-        userClient.delete();
+        userClient.delete(token);
     }
 
     @Test

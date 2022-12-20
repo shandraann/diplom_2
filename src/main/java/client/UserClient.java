@@ -63,14 +63,12 @@ public class UserClient extends RestAssuredClient {
     }
 
     @Step("Удаление пользователя")
-    public Response delete() {
-        if (this.token.equals("")) {
+    public Response delete(String token) {
             return given()
                     .spec(getBaseSpec())
                     .auth().oauth2(token)
-                    .delete("/api/auth/user");
-        }
-        return null;
+                    .when()
+                    .delete("/api/auth/user" + "user");
 
     }
 }

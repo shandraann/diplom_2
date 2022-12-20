@@ -20,7 +20,7 @@ public class LoginTest {
 
     @After
     public void delete() {
-        userClient.delete();
+        userClient.delete(userClient.token);
     }
 
     @Test
