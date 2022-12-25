@@ -10,6 +10,7 @@ public class RegistrationTest {
     public UserClient userClient;
     public User user;
     Response response;
+    private String token;
 
     @Before
     public void setup() {
@@ -18,7 +19,8 @@ public class RegistrationTest {
 
     @After
     public void delete() {
-        userClient.delete(userClient.token);
+        token = response.then().extract().path("accessToken");
+        userClient.delete(token);
     }
 
     @Test

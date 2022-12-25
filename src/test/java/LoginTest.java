@@ -10,17 +10,21 @@ public class LoginTest {
     public UserClient userClient;
     public User user;
     Response response;
+    private String token;
 
     @Before
     public void setup() {
         userClient = new UserClient();
         user = User.getRandomUser();
         userClient.create(user);
+        Response tokenResponse = userClient.login(user);
+        tokenResponse.then().assertThat().statusCode(200);
+        token = tokenResponse.then().extract().path("accessToken");
     }
 
     @After
     public void delete() {
-        userClient.delete(userClient.token);
+        userClient.delete(token);
     }
 
     @Test

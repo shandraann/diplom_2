@@ -4,13 +4,14 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import model.User;
+import org.jetbrains.annotations.NotNull;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.sessionId;
 
 public class UserClient extends RestAssuredClient {
 
     private static final String PATH = "/api/auth/";
-    public String token = "";
 
     @Step("Создание уникального пользователя")
     public Response create(User user) {
@@ -64,11 +65,15 @@ public class UserClient extends RestAssuredClient {
 
     @Step("Удаление пользователя")
     public Response delete(String token) {
-            return given()
-                    .spec(getBaseSpec())
-                    .auth().oauth2(token)
-                    .when()
-                    .delete("/api/auth/user" + "user");
+         if (token != null) {
+             return given()
+                     .spec(getBaseSpec())
+                     .auth().oauth2(token)
+                     .when()
+                     .delete("/api/auth/user" + "user");
+         } else {
+             return null;
+         }
 
     }
 }
